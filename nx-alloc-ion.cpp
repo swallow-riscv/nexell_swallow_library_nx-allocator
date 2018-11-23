@@ -198,6 +198,12 @@ NX_MEMORY_INFO * NX_AllocateMemory( int width, int height, int32_t planes, uint3
 		cVStride = ALIGN(height/2, 16);
 		break;
 
+	case V4L2_PIX_FMT_YUYV:
+		luStride = ALIGN(width, 32) << 1;
+		cStride = 0;
+		cVStride = 0;
+		break;
+
 	case V4L2_PIX_FMT_YUV422P:
 	case V4L2_PIX_FMT_YUV422M:
 	case V4L2_PIX_FMT_NV16:
