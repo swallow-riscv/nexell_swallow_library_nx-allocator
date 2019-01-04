@@ -150,9 +150,8 @@ static int32_t IsContinuousPlanes( uint32_t fourcc )
 		return 0;
 	}
 
-	return 1;
+	return 0;
 }
-
 //	Nexell Memory Allocator Wrapper
 //
 //	Suport Format & Planes
@@ -194,7 +193,7 @@ NX_MEMORY_INFO * NX_AllocateMemory( int width, int height, int32_t planes, uint3
 	case V4L2_PIX_FMT_NV12M:
 	case V4L2_PIX_FMT_NV21:
 	case V4L2_PIX_FMT_NV21M:
-		cStride = luStride/2;
+		cStride = ALIGN(width/2, 32);
 		cVStride = ALIGN(height/2, 16);
 		break;
 
@@ -210,8 +209,8 @@ NX_MEMORY_INFO * NX_AllocateMemory( int width, int height, int32_t planes, uint3
 	case V4L2_PIX_FMT_NV16M:
 	case V4L2_PIX_FMT_NV61:
 	case V4L2_PIX_FMT_NV61M:
-		cStride = luStride/2;
-		cVStride = luVStride;
+		cStride = ALIGN(width/2, 32);
+		cVStride = ALIGN(height/2, 16);
 		break;
 
 	case V4L2_PIX_FMT_YUV444:
